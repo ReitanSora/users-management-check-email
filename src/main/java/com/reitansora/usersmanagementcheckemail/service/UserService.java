@@ -32,8 +32,7 @@ public class UserService {
      * @return true if the user exists, false otherwise
      */
     public boolean findByEmailPublic(String email) {
-        Optional<UserEntity> user = userRepository.findByEmail(email);
-        return user.isPresent();
+        return userRepository.existsByEmail(email);
     }
 
 }

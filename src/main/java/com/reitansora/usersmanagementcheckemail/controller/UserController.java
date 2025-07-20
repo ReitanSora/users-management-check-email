@@ -23,8 +23,17 @@ public class UserController {
      * @return a ResponseEntity containing a map with the email and a boolean indicating if it is used
      */
     @GetMapping(path = "/isEmailUsed")
-    public ResponseEntity<?> isEmailUsed(@RequestParam(name = "email") String email){
+    public ResponseEntity<?> isEmailUsed(@RequestParam(name = "email", required=false) String email){
         Map<String, Object> response = new HashMap<>();
+
+        if (email == null || email.isBlank()) {
+            Map<String,Object> err = Map.of(
+                    "error", "Email param is required"
+            );
+            return ResponseEntity
+                    .badRequest()
+                    .body(err);
+        }
 
         try {
             boolean isUsed = userService.findByEmailPublic(email);
