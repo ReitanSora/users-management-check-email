@@ -50,7 +50,7 @@ public class WebSecurityConfig {
             )
 //                .securityMatcher("/**")
             .authorizeHttpRequests(registry -> registry
-                .requestMatchers("api/user/isEmailUsed").permitAll()
+                .requestMatchers("/api/user/isEmailUsed").permitAll()
                 .anyRequest().authenticated()
             ).logout(AbstractHttpConfigurer::disable);
 
